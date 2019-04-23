@@ -1,13 +1,5 @@
 version: '3.6'
 
-volumes:
-  nfs-app:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=host.docker.internal,actimeo=1
-      device: ":${PWD}"
-
 services:
 
   app:
@@ -17,41 +9,3 @@ services:
       - ./app:/opt/app
     ports:
       - 3000:3000
-    command: /bin/bash
-
-
-#  web:
-#    image: 'nginx:latest'
-#    ports:
-#      - '80:80'
-#      - '443:443'
-#    links:
-#      - app
-#    volumes:
-#      - ./.docker/web/etc/nginx/conf.d:/etc/nginx/conf.d
-#      - ./.docker/web/etc/nginx/certs:/etc/nginx/certs
-#      - nfs-app:/opt/app
-#    working_dir: /opt/app
-#
-#  app:
-#    build: ./.docker/app
-#    volumes:
-#      - nfs-app:/opt/app
-#    links:
-#      - db
-#      - redis
-#    working_dir: /opt/app
-#
-#  db:
-#    image: 'mysql:5.7'
-#    environment:
-#      MYSQL_ROOT_PASSWORD: secret
-#      MYSQL_DATABASE: app
-#    volumes:
-#      - ./.docker/db/etc/mysql/conf.d:/etc/mysql/conf.d
-#    ports:
-#      - '3306:3306'
-#
-#  redis:
-#    image: 'redis:latest'
-
