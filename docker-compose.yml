@@ -9,4 +9,4 @@ services:
       - ./app:/opt/app
     ports:
       - 3000:3000
-    command: node index.js
+    command: npm start
